@@ -41,3 +41,53 @@ def insert_AcessRecord(request):
         return HttpResponse('Webpage insertion is done Successfully')
 
     return render(request,'insert_AcessRecord.html',d)
+
+
+def retrieve_data(request):
+    LTO=Topic.objects.all()
+    d={'topics':LTO}
+    if request.method=='POST':
+        td=request.POST.getlist('topic')
+        print(td)
+        webqueryset=Webpage.objects.none()
+
+        for i in td:
+            webqueryset=webqueryset|Webpage.objects.filter(topic_name=i)
+        d1={'webpages':webqueryset}
+        return render(request,'display_webpage.html',d1)
+
+       
+        return HttpResponse('retrieve data  Successfully')
+    return render(request,'retrieve_data.html',d)
+
+
+def checkbox(request):
+    LTO=Topic.objects.all()
+    d={'topics':LTO}
+    return render(request,'checkbox.html',d)
+
+
+def radiobutton(request):
+    LTO=Topic.objects.all()
+    d={'topics':LTO}
+    return render(request,'radiobutton.html',d)
+
+def update_topic(request):
+    LTO=Webpage.objects.all()
+    d={'topics':LTO}
+    if request.method=='POST':
+        tn=request.POST.getlist('topic')
+        new=request.POST['new']
+        print(tn)
+        print(new)
+        for i in tn:
+            webqueryset=webqueryset|Webpage.objects.filter(topic_name=i)
+        d1={'webpages':webqueryset}
+        return render(request,'display_webpage.html',d1)
+
+       
+        return HttpResponse('retrieve data  Successfully')
+    return render(request,'retrieve_data.html',d)
+
+    LTO=Webpage.objects.all()
+    d={topic}
